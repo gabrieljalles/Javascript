@@ -1,5 +1,3 @@
-//ESCONDER FILLED  em todos, menos no circle
-
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
@@ -9,12 +7,13 @@ const sizeEl = document.getElementById('size');
 const colorEl = document.getElementById('color');
 const pencilBtn = document.getElementById('pencil');
 const lineBtn = document.getElementById('line');
+const squareBtn = document.getElementById('square');
 const circleBtn = document.getElementById('circle');
 const eraseBtn = document.getElementById('erase');
 const trashEl = document.getElementById('trash');
-const checkboxFill = document.getElementById('filled');
+const divFilledContainer = document.getElementById('filled-container');
 
-
+let checkboxFill = undefined;
 let size = 5;
 let filled = false;
 let isPressed = false;
@@ -24,20 +23,16 @@ let y = undefined;
 let sLine = false;
 let sCircle = false;
 let sPencil = false;
+let sSquare = false;
 let sErase = false;
+let sCheckBox = false;
 
 colorEl.addEventListener('change', (e) => {
     color = e.target.value;
 });
 
 
-checkboxFill.addEventListener('change', function() {
-    if(this.checked) {
-       filled = true;
-    }else{
-        filled = false;
-    }
-});
+
 
 canvas.addEventListener('mousedown', (e) =>{
     isPressed = true;
@@ -56,6 +51,12 @@ canvas.addEventListener('mouseup', (e) =>{
         const x2 = e.offsetX;
         const y2 = e.offsetY;
         drawLine(x,y,x2,y2);
+    }
+    if(sSquare){
+        const x2 = e.offsetX;
+        const y2 = e.offsetY;
+        drawSquare(x,y,x2,y2);
+
     }
     x = undefined;
     y = undefined;
@@ -101,51 +102,105 @@ function drawLine(x1,y1,x2,y2){
     ctx.stroke();
 }
 
-/*
-sCircle = false;
-sLine = true;
-sErase = false;
-sPencil = false; */
+function drawSquare(x1,y1,x2,y2){
+    ctx.beginPath();
+    ctx.rect(x1,y1,x2,y2);
+    if(filled){
+        ctx.fill();
+        ctx.fillStyle = color;
+    }else{
+        ctx.stroke();
+        ctx.strokeStyle = color;
+    }
+}
+
+function selectTool(pencil= false,line = false,circle = false,square=false,erase = false){
+    sPencil = pencil;
+    sLine = line;
+    sCircle = circle;
+    sSquare = square;
+    sErase = erase;
+}
+
+function showFillCheckbox(state= false){
+    if(state && !sCheckBox){
+        sCheckBox = true;
+        const inputEl = document.createElement('input');
+        const spanEl = document.createElement('span');
+        spanEl.innerText = 'Filled';
+        spanEl.classList.add('filled');
+        spanEl.id ='span'
+        inputEl.setAttribute('type','checkbox');
+        inputEl.classList.add('checkbox');
+        inputEl.id='checkbox';
+
+        divFilledContainer.appendChild(inputEl);
+        divFilledContainer.appendChild(spanEl);
+        
+        checkboxFill = document.getElementById('checkbox');
+
+        checkboxFill.addEventListener('change', function() {
+            if(this.checked) {
+            filled = true;
+            }else{
+                filled = false;
+            }
+    });
+       
+    }else if(sCheckBox){
+        sCheckBox = false;
+        divFilledContainer.removeChild(checkbox);
+        divFilledContainer.removeChild(span);
+        }
+}
+
 
 pencilBtn.addEventListener("click",()=>{
-    sPencil = true;
-    sCircle = false;
-    sLine = false;
-    sErase = false; 
+    selectTool(true,false,false,false,false);
     pencilBtn.classList.add('selected');
     circleBtn.classList.remove('selected');
     lineBtn.classList.remove('selected');
+    squareBtn.classList.remove('selected');
     eraseBtn.classList.remove('selected');
+    showFillCheckbox(false);
 });
 lineBtn.addEventListener("click",()=>{
-    sPencil = false;
-    sCircle = false;
-    sLine = true;
-    sErase = false; 
+    selectTool(false,true,false,false,false);
     pencilBtn.classList.remove('selected');
     circleBtn.classList.remove('selected');
     lineBtn.classList.add('selected');
+    squareBtn.classList.remove('selected');
     eraseBtn.classList.remove('selected');
+    showFillCheckbox(false);
 });
 circleBtn.addEventListener("click",()=>{
-    sPencil = false;
-    sCircle = true;
-    sLine = false;
-    sErase = false; 
+    selectTool(false,false,true,false,false); 
     pencilBtn.classList.remove('selected');
     circleBtn.classList.add('selected');
     lineBtn.classList.remove('selected');
+    squareBtn.classList.remove('selected');
     eraseBtn.classList.remove('selected');
+    showFillCheckbox(true);
 });
-eraseBtn.addEventListener('click',()=>{
-    sCircle = false;
-    sLine = false;
-    sErase = true;
-    sPencil = false;
+
+squareBtn.addEventListener('click', ()=>{
+    selectTool(false,false,false,true,false);
     pencilBtn.classList.remove('selected');
     circleBtn.classList.remove('selected');
     lineBtn.classList.remove('selected');
+    squareBtn.classList.add('selected');
+    eraseBtn.classList.remove('selected');
+    showFillCheckbox(true);
+})
+
+eraseBtn.addEventListener('click',()=>{
+    selectTool(false,false,false,false,true);
+    pencilBtn.classList.remove('selected');
+    circleBtn.classList.remove('selected');
+    lineBtn.classList.remove('selected');
+    squareBtn.classList.remove('selected');
     eraseBtn.classList.add('selected');
+    showFillCheckbox(false);
 });
 
 
