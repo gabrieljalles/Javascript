@@ -1,7 +1,6 @@
 # Loading img :low_brightness:
 
-* 
-* 
+* Texto de carregamento
 * Veja o GIF abaixo.
 
 <p align="center">
