@@ -1,12 +1,23 @@
 # Javascript :sparkles:
 ##### *All about my studies in Javascript*
+##### *The projects are divided by categories*
 ##### *Each project has one readme for more information.*
 ______________________________________
-### Easy projects
-&nbsp;&nbsp;&nbsp; They are projects used to learn about specific tools in Javascript.
+## :eyes: FRONT-END
+### Pure Javascript
 
-### Easy+ projects
-&nbsp;&nbsp;&nbsp; When i began to understand more about Javascript
+#### &nbsp;&nbsp;Learning projects
+&nbsp;&nbsp;&nbsp;&nbsp; They are projects used to learn about specific tools in Javascript.
 
-### Studies
-&nbsp;&nbsp;&nbsp; Studying with examples;
+#### &nbsp;&nbsp;Small projects
+&nbsp;&nbsp;&nbsp;&nbsp; When i began to understand more about Javascript
+
+#### &nbsp;&nbsp; Studies
+&nbsp;&nbsp;&nbsp;&nbsp; Studying with examples;
+
+### __React__
+##### *learning ...*
+
+## :satellite:BACK-END
+
+

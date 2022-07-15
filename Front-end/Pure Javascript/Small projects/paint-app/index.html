@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jalles painter</title>
+    <script type="text/javascript" src="assets/js/script.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css"/>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+        />
+</head>
+<body>
+    <div class="toolbox">
+        <div class="size-container">
+            <button id="decrease">-</button>
+            <span id="size">5</span>
+            <button id="increase">+</button>
+        </div>
+        <input type="color" class="color" id="color" />
+        <div class="filled-container" id="filled-container">
+        </div>
+        <div class="tools">
+            <button class="pencil" id="pencil"><i class="fas fa-pencil-alt"></i></i></button>
+            <button class="line" id="line">/</button>
+            <button class="square" id="square"><i class="fas fa-square"></i></button>
+            <button class="circle" id="circle">o</button>
+            <button class="erase" id="erase"><i class="fas fa-eraser"></i></button>
+            <button id="trash"><i class="fas fa-trash-alt"></i></button>
+        </div>
+    </div>
+    <canvas id="canvas" width="1024" height="720"></canvas>
+</body>
+</html>
